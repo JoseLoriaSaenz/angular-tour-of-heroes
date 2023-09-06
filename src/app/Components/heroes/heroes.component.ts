@@ -35,9 +35,4 @@ export class HeroesComponent implements OnInit {
     this.selectedHero = hero;
     this.messageService.add(`HeroesComponent: Selected hero id=${hero.id}`);
   }
-
-  resizeImg(hero: Hero) {
-    hero.image_url = hero.image_url.replace('/sm/', '/xs/');
-    console.log(hero.image_url);
-  }
 }

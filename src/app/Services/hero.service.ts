@@ -16,7 +16,7 @@ export class HeroService {
   constructor(private messageService: MessageService,
     private http: HttpClient) { }
 
-  getHeroes(): Observable<Hero[]> {
+  getMockUpDataHeroes(): Observable<Hero[]> {
     this.getHeroesAPI();
     const heroes = of(HEROES);
     this.messageService.add('HeroService: fetched heroes');
