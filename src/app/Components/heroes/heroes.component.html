@@ -1,9 +1,13 @@
-<h2 class="display-4">My Heroes</h2>
-<ul>
-  <li *ngFor="let hero of heroes" class="m-1">
-    <button class="btn btn-primary" type="button" (click)="onSelect(hero)">
-      <span>{{ hero.name }}</span>
-    </button>
-  </li>
-</ul>
+<div class="container mt-3">
+  <div class="row row-cols-auto">
+  <div *ngFor="let hero of heroes" class="col m-2">
+    <div class="card" style="width: 10rem">
+      <img src={{hero.image_url}}  alt={{hero.image_url}} (click)="onSelect(hero)" />
+      <div class="card-body">
+        <h6 class="card-subtitle mb-2 text-muted">{{hero.name}}</h6>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>   
+      </div>
+    </div>
+  </div>
+</div>
 <app-hero-detail [hero]="selectedHero"></app-hero-detail>

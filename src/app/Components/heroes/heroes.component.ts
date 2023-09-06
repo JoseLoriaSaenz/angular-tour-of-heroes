@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Hero } from '../../interfaces/hero';
 import { HeroService } from '../../Services/hero.service';
 import { MessageService } from 'src/app/Services/message.service';
+import { APIHero } from 'src/app/interfaces/apihero';
 
 @Component({
   selector: 'app-heroes',
@@ -9,15 +10,25 @@ import { MessageService } from 'src/app/Services/message.service';
   styleUrls: ['./heroes.component.css'],
 })
 export class HeroesComponent implements OnInit {
-  constructor(private heroService: HeroService, 
-    private messageService: MessageService) {}
+  constructor(
+    private heroService: HeroService,
+    private messageService: MessageService
+  ) {}
 
   heroes: Hero[] = [];
   selectedHero?: Hero;
 
+  ngOnInit(): void {
+    this.getHeroes();
+  }
+
   getHeroes(): void {
-    this.heroService.getHeroes()
-      .subscribe(heroes => this.heroes == heroes);
+    this.heroService.getHeroesAPI().subscribe((data) => {
+      var list = <APIHero[]>data
+      list.forEach(e => {
+        this.heroes.push({id: e.id, name: e.name, image_url: e.images.sm})
+      })
+    });    
   }
 
   onSelect(hero: Hero): void {
@@ -25,7 +36,8 @@ export class HeroesComponent implements OnInit {
     this.messageService.add(`HeroesComponent: Selected hero id=${hero.id}`);
   }
 
-  ngOnInit(): void {
-    this.getHeroes();
+  resizeImg(hero: Hero) {
+    hero.image_url = hero.image_url.replace('/sm/', '/xs/');
+    console.log(hero.image_url);
   }
 }

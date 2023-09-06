@@ -1,0 +1,18 @@
+<div class="d-flex flex-row justify-content-around mt-4">
+  <div *ngFor="let hero of heroes">
+    <div class="card" style="width: 14rem">
+      <img
+        src="{{ hero.image_url }}"
+        class="card-img-top"
+        alt="{{ hero.image_url }}"
+      />
+      <div class="card-body">
+        <h5 class="card-title">{{ hero.name }}</h5>
+        <p class="card-text">
+          Some quick example text to build on the card title and make up the
+          bulk of the card's content.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
